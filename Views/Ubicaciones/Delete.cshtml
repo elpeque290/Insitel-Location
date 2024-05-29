@@ -1,0 +1,55 @@
+﻿@model CRUD_INSITEL.Models.Ubicacione
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+<!-- Vista para confirmar y eliminar una ubicación, mostrando sus detalles y proporcionando botones para confirmar la eliminación o volver a la lista. -->
+
+<h1>Eliminar Ubicación</h1>
+
+<h3>¿Estás seguro de que deseas eliminar esta ubicación?</h3>
+<div>
+    <h4>Ubicación</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ubicacion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ubicacion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Longitud)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Longitud)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Latitud)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Latitud)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TemperaturaActual)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TemperaturaActual)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger btn-sm">
+            <i class="fas fa-trash"></i> Eliminar
+        </button>
+        <a asp-action="Index" class="btn btn-secondary btn-sm">
+            <i class="fas fa-arrow-left"></i> Volver a la lista
+        </a>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+}
+

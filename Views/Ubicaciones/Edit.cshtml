@@ -1,0 +1,51 @@
+﻿@model CRUD_INSITEL.Models.Ubicacione
+
+@{
+    ViewData["Title"] = "Editar Ubicación";
+}
+
+<!-- Vista para editar una ubicación, con campos para la ubicación, longitud, latitud y temperatura actual, y botones para guardar los cambios o volver a la lista. -->
+
+<h1>Editar Ubicación</h1>
+
+<h4>Ubicación</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Ubicacion" class="control-label">Ubicación</label>
+                <input asp-for="Ubicacion" class="form-control" />
+                <span asp-validation-for="Ubicacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longitud" class="control-label">Longitud</label>
+                <input asp-for="Longitud" class="form-control" type="number" step="any" />
+                <span asp-validation-for="Longitud" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Latitud" class="control-label">Latitud</label>
+                <input asp-for="Latitud" class="form-control" type="number" step="any" />
+                <span asp-validation-for="Latitud" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TemperaturaActual" class="control-label">Temperatura Actual (°C)</label>
+                <input asp-for="TemperaturaActual" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="TemperaturaActual" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver a la lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

@@ -1,0 +1,49 @@
+﻿@model CRUD_INSITEL.Models.Ubicacione
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<!-- Vista para mostrar los detalles de una ubicación, incluyendo su ubicación, longitud, latitud y temperatura actual, con botones para editar la ubicación o volver a la lista. -->
+
+<h1>Detalles de Ubicación</h1>
+
+<div>
+    <h4>Detalles de la Ubicación</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ubicacion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ubicacion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Longitud)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Longitud)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Latitud)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Latitud)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TemperaturaActual)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TemperaturaActual)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</a>
+    <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left"></i> Volver a la lista</a>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+}
+

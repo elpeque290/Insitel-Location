@@ -1,0 +1,53 @@
+﻿@model CRUD_INSITEL.Models.Ubicacione
+
+@{
+    ViewData["Title"] = "Crear Ubicación";
+}
+
+<!-- Vista para crear una nueva ubicación con campos para ingresar ubicación, longitud, latitud y temperatura actual, incluyendo botones para enviar el formulario y volver a la lista.-->
+<h1>Crear Ubicación</h1>
+
+<h4>Detalles de la Ubicación</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ubicacion" class="control-label">Ubicación</label>
+                <input asp-for="Ubicacion" class="form-control" />
+                <span asp-validation-for="Ubicacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longitud" class="control-label">Longitud</label>
+                <input asp-for="Longitud" class="form-control" type="number" step="any" />
+                <span asp-validation-for="Longitud" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Latitud" class="control-label">Latitud</label>
+                <input asp-for="Latitud" class="form-control" type="number" step="any" />
+                <span asp-validation-for="Latitud" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TemperaturaActual" class="control-label">Temperatura Actual</label>
+                <input asp-for="TemperaturaActual" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="TemperaturaActual" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-sm">
+                    <i class="fas fa-plus"></i> Crear Ubicación
+                </button>
+                <a asp-action="Index" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-arrow-left"></i> Volver a la lista
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

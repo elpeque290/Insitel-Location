@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CRUD_INSITEL.Models.Ubicacione>
+
+@{
+    ViewData["Title"] = "Ubicaciones";
+}
+<!-- Vista para mostrar una lista de ubicaciones con botones para crear, editar, ver detalles y eliminar, junto con un mapa que muestra las ubicaciones en un mapa de OpenStreetMap. -->
+
+<h1>Ubicaciones</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus"></i> Crear Nuevo</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ubicacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TemperaturaActual)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ubicacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Longitud)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Latitud)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemperaturaActual)
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-warning btn-sm" asp-route-id="@item.Id"><i class="fas fa-edit"></i> Editar</a>
+                    <a asp-action="Details" class="btn btn-primary btn-sm" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i> Detalles</a>
+                    <a asp-action="Delete" class="btn btn-danger btn-sm" asp-route-id="@item.Id"><i class="fas fa-trash"></i> Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="map" style="width: 100%; height: 400px; margin-top: 20px;"></div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Centrar el mapa en Bogotá con un nivel de zoom de 10
+        var map = L.map('map').setView([4.6097, -74.0817], 10);
+
+        // Agregar una capa de mosaico de OpenStreetMap
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Convertir el modelo a formato JSON y asignarlo a una variable JavaScript
+        var jsModel = @Html.Raw(Json.Serialize(Model));
+        console.log(jsModel);
+
+        // Recorrer los elementos del modelo y agregar marcadores al mapa
+        for (var i in jsModel) {
+            var item = jsModel[i];
+            // Asegurarse de que las coordenadas de latitud y longitud sean correctas
+            L.marker([item.latitud, item.longitud]).addTo(map)
+                .bindPopup(item.ubicacion + '<br> Temperatura: ' + item.temperaturaActual + '°C');
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+}
